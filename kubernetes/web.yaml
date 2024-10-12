@@ -1,0 +1,35 @@
+---
+# Deployment per l'applicazione web
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hello-world
+  template:
+    metadata:
+      labels:
+        app: hello-world
+    spec:
+      containers:
+      - name: web
+        image: perteghella/devfest-modena-2024:1.0
+
+---
+# Service per l'applicazione web
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-world
+  labels:
+    app: hello-world
+spec:
+  ports:
+    - name: "hello-world"
+      port: 5000
+      targetPort: 5000
+  selector:
+    app: hello-world

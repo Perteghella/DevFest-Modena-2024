@@ -1,0 +1,12 @@
+
+services:
+  redis:
+    image: 'redis:alpine'
+    ports:
+      - '6379:6379'
+  web:
+    restart: on-failure
+    build: ./
+    hostname: web1
+    ports:
+      - '8000:5000'
